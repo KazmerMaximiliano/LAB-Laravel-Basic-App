@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Usuarios",
+    "icon": "fas fa-user",
+    "type": "route",
+    "url": "/users",
+    "roles": ["superAdmin", "administrador"],
+    "divider": false
+  },
+  {
+    "name": "Roles",
+    "icon": "fas fa-tag",
+    "type": "route",
+    "url": "/roles",
+    "roles": ["superAdmin"],
+    "divider": true
+  }
+]
