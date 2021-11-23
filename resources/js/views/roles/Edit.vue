@@ -21,7 +21,7 @@
 
     <v-row justify="center">
       <v-col cols="10" md="8" lg="6">
-        <v-card shaped outlined>
+        <v-card class="rounded-xl" outlined>
           <v-card-title>Editar rol</v-card-title>
           <v-divider></v-divider>
           <v-card-text class="mt-6 mb-2">
@@ -31,7 +31,7 @@
                   <v-row justify="center">
                     <v-col cols="12" class="py-0 px-5">
                       <v-text-field
-                        v-model="$store.state.roles.form.role"
+                        v-model="form.role"
                         :rules="[rules.required]"
                         label="Rol"
                         outlined
@@ -54,7 +54,7 @@
                   <v-row justify="center">
                     <v-btn
                       type="submit"
-                      tile
+                      rounded
                       class="elevation-0 mb-2"
                       :disabled="$store.state.inProcess"
                       :loading="$store.state.inProcess"
@@ -75,6 +75,7 @@
 <script>
 export default {
   data: () => ({
+    form: {},
     permissionsArray: [],
     permissions: null,
     rules: {
@@ -83,6 +84,7 @@ export default {
   }),
 
   mounted() {
+    this.form = this.$store.state.roles.form
     this.getPermissions()
     this.setPermissions()
   },
@@ -104,8 +106,8 @@ export default {
     },
 
     setPermissions() {
-      if (this.$store.state.roles.form.permission) {
-        this.permissions = this.$store.state.roles.form.permission
+      if (this.form.permission) {
+        this.permissions = this.form.permission
       }
     },
 
@@ -123,10 +125,11 @@ export default {
             description = `${find.description}, ${description}`
           }
         }
-        this.$store.state.roles.form.permission = permission
-        this.$store.state.roles.form.description = description
+        this.form.permission = permission
+        this.form.description = description
+        this.$store.commit('roles/fillForm', this.form)
         await this.$store.dispatch('roles/update', {
-          id: this.$store.state.roles.form.id
+          id: this.form.id
         })
         this.$router.push('/roles')
       }

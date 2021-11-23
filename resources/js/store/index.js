@@ -1,28 +1,28 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import Vue from 'vue'
+import Vuex from 'vuex'
 
 // Modules
-import modules from "./modules";
+import modules from './modules'
 
 // Plugins
-import { process } from "./subscribers/process";
+import { process } from './subscribers/process'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 export default new Vuex.Store({
-    state: {
-        inProcess: false,
-    },
+  state: {
+    inProcess: false
+  },
 
-    mutations: {
-        iterateProcess(state, value) {
-            state.inProcess = value;
-        },
-    },
+  mutations: {
+    iterateProcess(state, value) {
+      state.inProcess = value
+    }
+  },
 
-    actions: {},
+  actions: {},
 
-    modules: modules,
+  modules: modules,
 
-    plugins: [process]
-});
+  plugins: [process]
+})

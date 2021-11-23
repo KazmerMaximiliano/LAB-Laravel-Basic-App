@@ -1,18 +1,13 @@
 <template>
-  <div class="d-flex justify-center" v-if="$store.state.auth.user">
-    <div>
-      <div class="account-edit-btn-container">
-        <v-btn icon small color="primary" @click="edit()"
-          ><v-icon size="small">fas fa-pen</v-icon></v-btn
-        >
-      </div>
-      <div class="py-4 d-flex justify-center">
+  <div v-if="$store.state.auth.user">
+    <div class="d-flex flex-nowrap flex-row">
+      <div>
         <v-avatar
           v-on="on"
-          size="90"
+          :size="$vuetify.breakpoint.smAndDown ? '90' : '150'"
           color="primary"
-          style="cursor: pointer"
-          @click="fotoDialog = true"
+          class="profile-avatar"
+          @click="editPhotoDialog = true"
         >
           <img
             v-if="$store.state.auth.user.user.foto != null"
@@ -27,19 +22,48 @@
           >
             {{ $store.state.auth.user.user.name[0] }}
           </span>
-          <div
-            class="account-edit-photo-btn-container"
-            @click="editPhotoDialog = true"
-          >
+          <div class="account-edit-photo-btn-container">
             <v-icon color="white">fas fa-pen</v-icon>
           </div>
         </v-avatar>
       </div>
-      <h2 class="text-center primary--text my-4">
-        {{ $store.state.auth.user.user.name }}
-      </h2>
-      <v-divider></v-divider>
-      <p class="mt-4">{{ $store.state.auth.user.user.email }}</p>
+      <div class="mx-6 mt-2 d-flex flex-column">
+        <h2 class="primary--text">
+          {{ $store.state.auth.user.user.name }}
+        </h2>
+        <v-divider class="my-1"></v-divider>
+        <p>{{ $store.state.auth.user.user.email }}</p>
+        <v-row>
+          <v-col cols="auto">
+            <v-btn
+              rounded
+              outlined
+              color="error"
+              :icon="$vuetify.breakpoint.smAndDown"
+              @click="exit()"
+            >
+              <v-icon v-if="$vuetify.breakpoint.smAndDown" size="medium">
+                fas fa-sign-out-alt
+              </v-icon>
+              <div v-else>Cerrar Sesión</div>
+            </v-btn>
+          </v-col>
+          <v-col cols="auto">
+            <v-btn
+              rounded
+              outlined
+              color="blue"
+              :icon="$vuetify.breakpoint.smAndDown"
+              @click="edit()"
+            >
+              <v-icon v-if="$vuetify.breakpoint.smAndDown" size="medium">
+                fas fa-pen
+              </v-icon>
+              <div v-else>Editar Cuenta</div>
+            </v-btn>
+          </v-col>
+        </v-row>
+      </div>
     </div>
 
     <v-dialog v-model="editPhotoDialog" max-width="450px">
@@ -48,37 +72,51 @@
         <v-divider></v-divider>
         <v-card-text class="py-8">
           <v-row justify="center">
-            <div v-if="inProcess">
-              <v-progress-circular
-                :size="70"
-                :width="7"
-                color="primary"
-                indeterminate
-                style="margin-top: 50px"
-              ></v-progress-circular>
-            </div>
-            <div class="edit-photo-croppa" v-else>
-              <croppa
-                v-model="foto"
-                :width="250"
-                :height="250"
-                placeholder="Foto de perfil"
-                placeholder-color="#000"
-                :placeholder-font-size="25"
-                canvas-color="transparent"
-                :show-remove-button="false"
-                :show-loading="true"
-                :loading-size="25"
-                :prevent-white-space="true"
-                :zoom-speed="10"
-                @file-choose="newFoto = true"
-                :initial-image="
-                  $store.state.auth.user.user.photo
-                    ? $store.state.auth.user.user.photo
-                    : ''
-                "
-              ></croppa>
-            </div>
+            <v-col cols="auto">
+              <div v-if="inProcess">
+                <v-progress-circular
+                  :size="70"
+                  :width="7"
+                  color="primary"
+                  indeterminate
+                  style="margin-top: 50px"
+                ></v-progress-circular>
+              </div>
+              <div class="edit-photo-croppa" v-else>
+                <croppa
+                  v-model="foto"
+                  :width="250"
+                  :height="250"
+                  placeholder="Foto de perfil"
+                  placeholder-color="#000"
+                  :placeholder-font-size="25"
+                  canvas-color="transparent"
+                  :show-remove-button="false"
+                  :show-loading="true"
+                  :loading-size="25"
+                  :prevent-white-space="true"
+                  :zoom-speed="10"
+                  @file-choose="newFoto = true"
+                  :initial-image="
+                    $store.state.auth.user.user.photo
+                      ? $store.state.auth.user.user.photo
+                      : ''
+                  "
+                ></croppa>
+              </div>
+            </v-col>
+            <v-col cols="12" v-if="foto" class="my-2">
+              <v-row justify="center">
+                <v-btn
+                  v-if="foto.hasImage()"
+                  @click="foto.remove()"
+                  text
+                  rounded
+                  color="error"
+                  >Eliminar</v-btn
+                >
+              </v-row>
+            </v-col>
           </v-row>
         </v-card-text>
         <v-divider></v-divider>
@@ -87,7 +125,7 @@
           <v-btn
             color="error"
             text
-            @click="editPhotoDialog"
+            @click="editPhotoDialog = false"
             :disabled="inProcess"
             >Cancelar</v-btn
           >
@@ -108,13 +146,15 @@ export default {
     newFoto: false,
     editPhotoDialog: false
   }),
+
   methods: {
     async edit() {
-      await this.$store.dispatch('usuarios/edit', {
+      await this.$store.dispatch('users/edit', {
         data: this.$store.state.auth.user.user
       })
-      this.$router.push('usuarios/editar/1')
+      this.$router.push('users/editar/1')
     },
+
     async editPhoto() {
       this.inProcess = true
       let profilePhoto = this.foto.generateDataUrl()
@@ -128,17 +168,27 @@ export default {
       await this.$store.dispatch('auth/user')
       this.inProcess = false
       this.editPhotoDialog = false
+    },
+
+    async exit() {
+      await this.$store.dispatch('auth/logout')
     }
   }
 }
 </script>
 
 <style lang="scss">
+.profile-avatar {
+  cursor: pointer;
+  border: 4px solid rgb(249, 121, 33);
+}
+
 .account-edit-btn-container {
   position: absolute;
   top: 12px;
   right: 12px;
 }
+
 .account-edit-photo-btn-container {
   height: 100%;
   width: 100%;
@@ -152,6 +202,7 @@ export default {
     opacity: 1;
   }
 }
+
 .edit-photo-croppa {
   height: 250px;
   width: 250px;

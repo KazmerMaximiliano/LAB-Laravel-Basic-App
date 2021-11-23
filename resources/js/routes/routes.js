@@ -3,7 +3,6 @@ import Welcome from '../views/Welcome'
 import NotFound from '../views/NotFound'
 import AccessDenied from '../views/AccessDenied'
 import Profile from '../views/Profile'
-import Dev from '../views/Dev'
 
 // Roles
 import Roles from '../views/roles/Index'
@@ -46,15 +45,6 @@ const routes = [
     meta: {
       permission: 'authenticated',
       redirect: 'login'
-    }
-  },
-  {
-    path: '/dev',
-    name: 'dev',
-    component: Dev,
-    meta: {
-      rol: ['superAdmin'],
-      redirect: 'welcome'
     }
   },
 
@@ -107,9 +97,10 @@ const routes = [
     }
   },
   {
-    path: '/users/editar',
+    path: '/users/editar/:currentUser',
     name: 'users_edit',
     component: UsersEdit,
+    props: true,
     meta: {
       rol: ['superAdmin', 'administrador'],
       redirect: 'welcome'

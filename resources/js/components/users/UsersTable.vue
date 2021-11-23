@@ -6,17 +6,18 @@
           <tr>
             <th class="text-left">Nombre</th>
             <th class="text-left">Email</th>
+            <th class="text-left"></th>
           </tr>
         </thead>
         <tbody>
-          <tr
-            v-for="(item, id) in users"
-            :key="id"
-            @contextmenu="deploy($event, item)"
-            style="cursor: pointer"
-          >
+          <tr v-for="(item, id) in users" :key="id" style="cursor: pointer">
             <td>{{ item.name }}</td>
             <td>{{ item.email }}</td>
+            <td>
+              <v-btn icon color="primary" @click="deploy($event, item)">
+                <v-icon size="medium">fas fa-ellipsis-v</v-icon>
+              </v-btn>
+            </td>
           </tr>
         </tbody>
       </template>
@@ -90,6 +91,7 @@
           <v-btn
             color="error"
             text
+            rounded
             @click="
               deleteDialog = false
               selectedItem = null
@@ -100,6 +102,7 @@
           <v-btn
             color="success"
             text
+            rounded
             @click="deleteUsuario()"
             :disabled="inProcess"
             >Aceptar</v-btn
@@ -137,7 +140,7 @@ export default {
 
     edit() {
       this.$store.dispatch('users/edit', { data: this.selectedItem })
-      this.$router.push('/users/editar')
+      this.$router.push('/users/editar/0')
     },
 
     async deleteUsuario() {

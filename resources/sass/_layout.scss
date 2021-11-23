@@ -1,0 +1,108 @@
+body::-webkit-scrollbar {
+  width: 6px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: $primary;
+}
+
+.layout {
+  background-color: $background !important;
+  .appbar {
+    height: 88px !important;
+    .v-toolbar__content {
+      height: inherit !important;
+    }
+  }
+
+  .sidebar {
+    background-color: $background !important;
+    border: none !important;
+    .sidbar-header {
+      background-color: $primary;
+      height: 88px;
+      .sidebar-header-content {
+        height: inherit;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 32px;
+        background-color: $background;
+        border-radius: 0px 0px 0px 32px;
+      }
+    }
+
+    .v-navigation-drawer__content {
+      overflow-y: hidden;
+      .sidebar-body {
+        display: flex;
+        flex-direction: column;
+        border-radius: 0px 56px 0px 0px;
+        height: 100%;
+        background: $secondary;
+        background: linear-gradient(0deg, $secondary 0%, $primary 100%);
+        .sidebar-route-list {
+          padding: 32px 0px;
+          &.bottom-list {
+            padding: 0px;
+          }
+          .no-hover-item {
+            &.theme--light {
+              &.v-list-item {
+                &:not(.v-list-item--active) {
+                  &:not(.v-list-item--disabled) {
+                    color: transparent !important;
+                  }
+                }
+              }
+            }
+          }
+          .route-items {
+            display: flex;
+            padding: 4px 42px 4px 18px;
+            margin: 4px 0px;
+            border-radius: 42px 42px 42px 42px;
+            color: rgba($color: #fff, $alpha: 0.75) !important;
+            .v-list-item__icon {
+              .v-icon {
+                color: rgba($color: #fff, $alpha: 0.75) !important;
+
+                &.theme--light {
+                  &.v-icon {
+                    color: rgba($color: #fff, $alpha: 0.75) !important;
+                  }
+                }
+              }
+            }
+          }
+          .route-active {
+            .route-items {
+              color: #fff;
+              .v-list-item__icon {
+                color: #fff;
+              }
+              background-color: rgba($color: #fff, $alpha: 0.15);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .footer {
+    padding-right: 48px !important;
+    padding-left: 48px !important;
+    background: #fff !important;
+    bottom: -136px !important;
+  }
+
+  .v-navigation-drawer .v-list:not(.v-select-list) {
+    background: none !important;
+  }
+
+  .theme--light.v-list-item--active:before,
+  .theme--light.v-list-item--active:hover:before,
+  .theme--light.v-list-item:focus:before {
+    opacity: 0 !important;
+  }
+}

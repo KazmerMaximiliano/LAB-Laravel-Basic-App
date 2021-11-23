@@ -1,9 +1,9 @@
 <template>
-  <div style="height: 95vh" class="d-flex justify-center align-center">
+  <div style="height: 85vh" class="d-flex justify-center align-center">
     <v-row>
       <v-col cols="12">
         <v-row justify="center">
-          <img src="/img/logo.png" width="300" height="auto" />
+          <img src="/img/imagotipo.png" width="300" height="auto" />
         </v-row>
       </v-col>
       <v-col cols="12">

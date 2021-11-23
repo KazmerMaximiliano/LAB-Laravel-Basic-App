@@ -3,11 +3,11 @@
     <v-scroll-x-transition mode="out-in">
       <div v-if="!loginDialog" key="home">
         <v-row justify="center">
-          <img src="/img/logo.png" width="300" height="auto" />
+          <img src="/img/imagotipo.png" width="300" height="auto" />
         </v-row>
         <v-row justify="center">
           <v-btn
-            tile
+            rounded
             color="primary"
             class="elevation-0 my-10"
             @click="loginDialog = true"
@@ -18,7 +18,13 @@
 
       <div v-if="loginDialog" key="login">
         <v-row justify="center" align="center">
-          <v-card min-width="400px" max-width="400px" width="100%" outlined>
+          <v-card
+            min-width="400px"
+            max-width="400px"
+            width="100%"
+            outlined
+            class="rounded-xl"
+          >
             <v-card-title primary-title>Iniciar Sesión</v-card-title>
             <v-divider></v-divider>
             <v-card-text>
@@ -64,13 +70,14 @@
                       <v-btn
                         @click="loginDialog = false"
                         text
+                        rounded
                         class="mr-5 elevation-0"
                         color="primary"
                         >Cancelar</v-btn
                       >
                       <v-btn
                         type="submit"
-                        tile
+                        rounded
                         class="mr-5 elevation-0"
                         color="primary"
                         >Iniciar sesión</v-btn

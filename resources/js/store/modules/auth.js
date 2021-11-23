@@ -51,6 +51,7 @@ const actions = {
       axios
         .get('/api/user')
         .then((response) => {
+          localStorage.setItem('rol', JSON.stringify(response.data.rol))
           commit('fillUser', response.data)
           resolve(response.data)
         })
@@ -110,6 +111,7 @@ const actions = {
 
   deleteAuthData: function ({ commit }) {
     window.localStorage.removeItem('logged')
+    localStorage.removeItem('rol')
     commit('resetUser')
     commit('resetForm')
 

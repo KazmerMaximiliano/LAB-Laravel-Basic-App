@@ -8,8 +8,8 @@ import VueAuth from './plugins/vue-auth'
 import JsonViewer from 'vue-json-viewer'
 import 'vue-croppa/dist/vue-croppa.css'
 import './config'
-import './directives'
-import './filters'
+
+Vue.prototype.$appName = 'Laravel Basic App'
 
 window.axios = require('axios')
 window.axios.defaults.withCredentials = true
@@ -20,8 +20,8 @@ Vue.use(JsonViewer)
 
 Vue.use(VueAuth, { router })
 Vue.prototype.$user.set({
-  rol: 'not_authorized',
-  permissions: []
+  rol: JSON.parse(localStorage.getItem('rol')) || 'not_authorized',
+  permissions: JSON.parse(localStorage.getItem('rol')) ? ['authenticated'] : []
 })
 
 Vue.config.productionTip = false

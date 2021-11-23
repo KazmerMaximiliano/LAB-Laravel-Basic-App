@@ -21,18 +21,18 @@
 
     <v-row justify="center">
       <v-col cols="10" md="8" lg="6">
-        <v-card shaped outlined>
+        <v-card class="rounded-xl" outlined>
           <v-card-title>Nuevo usuario</v-card-title>
           <v-divider></v-divider>
           <v-card-text class="mt-6 mb-2">
             <v-row justify="center">
               <v-col cols="12" sm="10">
                 <v-form ref="CreateUsers" @submit.prevent="saveUser()">
-                  <UsersForm mode="create"></UsersForm>
+                  <UsersForm mode="create" ref="UsersForm"></UsersForm>
                   <v-row justify="center">
                     <v-btn
                       type="submit"
-                      tile
+                      rounded
                       class="elevation-0 mb-2"
                       :disabled="$store.state.inProcess"
                       :loading="$store.state.inProcess"
@@ -69,6 +69,7 @@ export default {
   methods: {
     saveUser: async function () {
       if (this.$refs.CreateUsers.validate()) {
+        this.$refs.UsersForm.fillForm()
         await this.$store.dispatch('users/save')
         this.updateSession()
         this.$router.push('/users')

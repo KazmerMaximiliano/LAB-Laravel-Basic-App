@@ -22,7 +22,7 @@
     <v-container>
       <v-row justify="center">
         <v-col cols="12" lg="10">
-          <v-card shaped outlined :loading="$store.state.inProcess">
+          <v-card class="rounded-xl" outlined :loading="$store.state.inProcess">
             <v-card-title>Roles</v-card-title>
             <v-divider></v-divider>
             <v-card-text class="px-0">
@@ -123,6 +123,7 @@
           <v-btn
             color="error"
             text
+            rounded
             @click="
               deleteDialog = false
               selectedItem = null
@@ -130,7 +131,12 @@
             :disabled="inProcess"
             >Cancelar</v-btn
           >
-          <v-btn color="success" text @click="deleteRol()" :disabled="inProcess"
+          <v-btn
+            color="success"
+            text
+            rounded
+            @click="deleteRol()"
+            :disabled="inProcess"
             >Aceptar</v-btn
           >
         </v-card-actions>
@@ -175,7 +181,7 @@ export default {
     },
 
     edit() {
-      this.$store.dispatch('/roles/edit', { data: this.selectedItem })
+      this.$store.dispatch('roles/edit', { data: this.selectedItem })
       this.$router.push('/roles/editar')
     },
 

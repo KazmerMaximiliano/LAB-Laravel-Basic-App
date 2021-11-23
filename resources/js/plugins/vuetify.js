@@ -19,16 +19,6 @@ export default new Vuetify({
         success: '#4CAF50',
         warning: '#FFC107',
         disabled: '#787878'
-      },
-      dark: {
-        primary: '#5E00FF',
-        secondary: '#A169FF',
-        accent: '#5E00FF',
-        error: '#F44336',
-        info: '#00BCD4',
-        success: '#4CAF50',
-        warning: '#FFC107',
-        disabled: '#787878'
       }
     }
   },

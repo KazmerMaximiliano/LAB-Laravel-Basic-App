@@ -22,7 +22,7 @@
     <v-container>
       <v-row justify="center">
         <v-col cols="12" lg="10">
-          <v-card shaped outlined :loading="$store.state.inProcess">
+          <v-card outlined class="rounded-xl" :loading="$store.state.inProcess">
             <v-card-title>Usuarios</v-card-title>
             <v-divider></v-divider>
             <v-card-text class="px-0">
