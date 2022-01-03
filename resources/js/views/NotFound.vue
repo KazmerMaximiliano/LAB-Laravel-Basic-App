@@ -1,7 +1,11 @@
 <template>
   <div class="container">
-    <img src="/img/imagotipo.png" width="300" height="auto" />
-    <h1 class="title">404 | Not Found</h1>
+    <div class="item">
+      <img src="/img/imagotipo.png" width="300" height="auto" />
+    </div>
+    <div class="item">
+      <h1 class="title">404 | Not Found</h1>
+    </div>
   </div>
 </template>
 
@@ -9,13 +13,21 @@
 .container {
   height: 85vh;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-}
+  .item {
+    flex: 0 1 auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-.title {
-  font-weight: bold;
-  text-align: center;
-  margin-top: 24px;
+  .title {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 24px;
+  }
 }
 </style>

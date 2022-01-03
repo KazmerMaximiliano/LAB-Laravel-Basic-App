@@ -10,6 +10,9 @@ Route::post('logout', [App\Http\Controllers\API\ApiAuthController::class, 'apiLo
 Route::post('auth/google', [App\Http\Controllers\API\ApiAuthController::class, 'google']);
 Route::post('auth/facebook', [App\Http\Controllers\API\ApiAuthController::class, 'facebook']);
 
+/*Websockets*/
+Route::get('websockets/test', [App\Http\Controllers\API\WebsocketsController::class, 'test']);
+
 Route::middleware('auth:sanctum')->group(function () {
     /*Users*/
     Route::get('user', [App\Http\Controllers\API\UsersController::class, 'user']);
@@ -18,7 +21,4 @@ Route::middleware('auth:sanctum')->group(function () {
 
     /*Roles & Permissions*/
     Route::apiResource('roles', App\Http\Controllers\API\RolesController::class, ['except' => ['create', 'edit', 'show',]]);
-
-    /*Websockets*/
-    Route::get('websockets/test', [App\Http\Controllers\API\WebsocketsController::class], 'test');
 });

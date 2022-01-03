@@ -10,10 +10,8 @@ use App\Http\Controllers\Controller;
 class WebsocketsController extends Controller
 {
     public function test() {
-        $user = User::find(auth()->id());
+        broadcast(new Hello('Hello: ' . rand(10,100)));
 
-        broadcast(new Hello('Hello: ' . $user->name));
-
-        return response()->json(['message' => 'Hello: ' . $user->name]);
+        return response()->json(['message' => 'Hello: ' . rand(10,100)]);
     }
 }

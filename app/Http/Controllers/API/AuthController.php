@@ -27,6 +27,7 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        return 'HOLA MUDNO';
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
