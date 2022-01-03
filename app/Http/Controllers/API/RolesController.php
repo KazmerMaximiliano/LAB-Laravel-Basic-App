@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 
 use App\Models\Role;
 use App\Models\User;
-use App\Models\Permission;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -13,11 +12,6 @@ class RolesController extends Controller
     public function __construct()
     {
         $this->middleware('auth:sanctum');
-
-        // $this->middleware('scope:roles-index')->only('index');
-        // $this->middleware('scope:roles-store')->only('store');
-        // $this->middleware('scope:roles-update')->only('update');
-        // $this->middleware('scope:roles-destroy')->only('destroy');
     }
 
     public function index(Request $request)
@@ -39,15 +33,9 @@ class RolesController extends Controller
     {
         $attributes = $request->validate([
             'role' => 'required',
-            'permission' => 'required',
-            'description' => 'required'
         ]);
-        Role::create($attributes);
-    }
 
-    public function permissionAll()
-    {
-        return Permission::permissionAll();
+        Role::create($attributes);
     }
 
     public function update(Request $request, $id)
@@ -55,9 +43,8 @@ class RolesController extends Controller
         $rol = Role::find($id);
         $attributes = $request->validate([
             'role' => 'required',
-            'permission' => 'required',
-            'description' => 'required'
         ]);
+
         $rol->update($attributes);
     }
 

@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Role;
-use App\Models\Permission;
 use Illuminate\Database\Seeder;
 
 class RolesTableSeeder extends Seeder
@@ -15,20 +14,20 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-
-        $permissionsSuperAdmin = Permission::permissionAll();
-        $permissionsAdmin = Permission::permissionExcept('roles-show roles-store roles-update roles-destroy');
-
         Role::create([
-            'role' => 'superAdmin',
-            'permission' => $permissionsSuperAdmin['permissions'],
-            'description' => $permissionsSuperAdmin['descriptions']
+            'role' => 'superadmin',
         ]);
 
         Role::create([
-            'role' => 'administrador',
-            'permission' => $permissionsAdmin['permissions'],
-            'description' => $permissionsAdmin['descriptions']
+            'role' => 'admin',
+        ]);
+
+        Role::create([
+            'role' => 'broker',
+        ]);
+
+        Role::create([
+            'role' => 'customer',
         ]);
     }
 }
