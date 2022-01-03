@@ -1,21 +1,11 @@
 const state = {
   roles: null,
-  permissions: null,
   form: {}
 }
 
 const mutations = {
   fillRoles(state, roles) {
-    for (const rol of roles.roles) {
-      rol.permission = rol.permission.split(' ')
-      rol.description = rol.description.split(', ')
-    }
-
     state.roles = roles
-  },
-
-  fillPermissions(state, permissions) {
-    state.permissions = permissions
   },
 
   fillForm(state, form) {
@@ -34,21 +24,6 @@ const actions = {
         .get('/api/roles', { params: params })
         .then((response) => {
           commit('fillRoles', response.data)
-          resolve(response.data)
-        })
-        .catch((error) => {
-          dispatch('errors/errorHandle', error.response, { root: true })
-          reject(error.response)
-        })
-    })
-  },
-
-  permissions: function ({ commit, dispatch }, params) {
-    return new Promise((resolve, reject) => {
-      axios
-        .get('/api/permissions', { params: params })
-        .then((response) => {
-          commit('fillPermissions', response.data)
           resolve(response.data)
         })
         .catch((error) => {

@@ -62,10 +62,6 @@ const actions = {
     })
   },
 
-  checkRole({ state }, data) {
-    // REVISAR
-  },
-
   updateAccount({ dispatch }) {
     return new Promise((resolve, reject) => {
       axios

@@ -28,17 +28,7 @@ export class RouteProtect {
   }
 
   _accessToRoute(route) {
-    if (this.Vauth.user && route.meta.permission) {
-      const permissionMatch = this.Vauth.user.permissions.find(
-        (per) => per === route.meta.permission
-      )
-      if (!permissionMatch) {
-        return {
-          access: false,
-          redirect: route.meta.redirect
-        }
-      }
-    } else if (this.Vauth.user && route.meta.rol) {
+    if (this.Vauth.user && route.meta.rol) {
       const rolMatch = route.meta.rol.find((rol) => rol === this.Vauth.user.rol)
       if (!rolMatch) {
         return { access: false, redirect: route.meta.redirect }

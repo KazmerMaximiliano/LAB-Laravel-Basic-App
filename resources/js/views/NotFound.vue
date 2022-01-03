@@ -1,16 +1,21 @@
 <template>
-  <div style="height: 85vh" class="d-flex justify-center align-center">
-    <v-row>
-      <v-col cols="12">
-        <v-row justify="center">
-          <img src="/img/imagotipo.png" width="300" height="auto" />
-        </v-row>
-      </v-col>
-      <v-col cols="12">
-        <h1 class="display-2 font-weight-light primary--text text-center">
-          404 | No Encontrado
-        </h1>
-      </v-col>
-    </v-row>
+  <div class="container">
+    <img src="/img/imagotipo.png" width="300" height="auto" />
+    <h1 class="title">404 | Not Found</h1>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.container {
+  height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-weight: bold;
+  text-align: center;
+  margin-top: 24px;
+}
+</style>

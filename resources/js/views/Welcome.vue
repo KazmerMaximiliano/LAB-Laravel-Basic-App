@@ -1,9 +1,21 @@
 <template>
-  <div style="height: 85vh" class="d-flex justify-center align-center">
-    <div>
-      <img src="/img/imagotipo.png" width="300" height="auto" />
-      <h1 class="text-center primary--text">Bienvenido</h1>
-      <br />
-    </div>
+  <div class="container">
+    <img src="/img/imagotipo.png" width="300" height="auto" />
+    <h1 class="title">WELCOME</h1>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.container {
+  height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-weight: bold;
+  text-align: center;
+  margin-top: 24px;
+}
+</style>
