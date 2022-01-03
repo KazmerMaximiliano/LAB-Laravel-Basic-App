@@ -19,4 +19,7 @@ Route::middleware('auth:sanctum')->group(function () {
     /*Roles & Permissions*/
     Route::apiResource('roles', 'App\Http\Controllers\API\RolesController', ['except' => ['create', 'edit', 'show',]]);
     Route::get('permissions', 'App\Http\Controllers\API\RolesController@permissionAll');
+
+    /*Websockets*/
+    Route::get('websockets/test', 'App\Http\Controllers\API\WebsocketsController@test');
 });

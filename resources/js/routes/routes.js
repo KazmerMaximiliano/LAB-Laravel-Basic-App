@@ -14,6 +14,9 @@ import Users from '../views/users/Index'
 import UsersCreate from '../views/users/Create'
 import UsersEdit from '../views/users/Edit'
 
+// Websockets
+import Event from '../views/websockets/Event'
+
 const routes = [
   {
     path: '/accessd_denied',
@@ -101,6 +104,17 @@ const routes = [
     name: 'users_edit',
     component: UsersEdit,
     props: true,
+    meta: {
+      rol: ['superAdmin', 'administrador'],
+      redirect: 'welcome'
+    }
+  },
+
+  // Websockets
+  {
+    path: '/event',
+    name: 'event',
+    component: Event,
     meta: {
       rol: ['superAdmin', 'administrador'],
       redirect: 'welcome'

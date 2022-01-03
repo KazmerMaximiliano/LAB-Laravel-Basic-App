@@ -24,6 +24,21 @@ Vue.prototype.$user.set({
   permissions: JSON.parse(localStorage.getItem('rol')) ? ['authenticated'] : []
 })
 
+// WEBSOCKETS
+import Echo from 'laravel-echo'
+window.pusher = require('pusher-js')
+
+window.Echo = new Echo({
+  broadcaster: 'pusher',
+  key: 'local',
+  wsHost: '127.0.0.1',
+  wsPort: 6001,
+  forceTLS: false,
+  disableStats: true
+})
+
+//
+
 Vue.config.productionTip = false
 
 new Vue({
